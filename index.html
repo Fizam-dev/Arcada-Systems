@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcana Systems - Secure Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔒</text></svg>">
+</head>
+<body>
+    <div id="blocker"></div>
+    
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-shield-alt"></i> Arcana Systems</h1>
+            <p class="subtitle">Secure Administrative Portal v3.14</p>
+            <div class="warning">
+                <i class="fas fa-exclamation-triangle"></i> WARNING: Unauthorized access is strictly prohibited
+            </div>
+        </header>
+
+        <main>
+            <div class="login-card">
+                <h2><i class="fas fa-lock"></i> Administrator Login</h2>
+                
+                <div class="form-group">
+                    <label for="username"><i class="fas fa-user"></i> Username:</label>
+                    <input type="text" id="username" placeholder="Enter admin username" autocomplete="off">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-key"></i> Password:</label>
+                    <input type="password" id="password" placeholder="Enter secure passphrase" autocomplete="off">
+                </div>
+                
+                <button id="loginBtn" onclick="attemptLogin()">
+                    <i class="fas fa-sign-in-alt"></i> Authenticate
+                </button>
+                
+                <div class="hint">
+                    <p><i class="fas fa-info-circle"></i> For security reasons, all client-side inspection tools have been disabled.</p>
+                    <p><i class="fas fa-eye-slash"></i> Remember: What you can't see won't hurt you... or will it?</p>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <h3><i class="fas fa-clipboard-list"></i> System Status</h3>
+                <div class="status-item">
+                    <span class="status-label">Firewall:</span>
+                    <span class="status-active"><i class="fas fa-shield-check"></i> ACTIVE</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Encryption:</span>
+                    <span class="status-active"><i class="fas fa-lock"></i> AES-256</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Inspection Tools:</span>
+                    <span class="status-disabled"><i class="fas fa-ban"></i> DISABLED</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Debug Mode:</span>
+                    <span class="status-disabled"><i class="fas fa-lock"></i> LOCKED</span>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p><i class="far fa-copyright"></i> 2024 Arcana Systems. All rights reserved.</p>
+            <p class="footer-note">
+                <i class="fas fa-quote-left"></i> Security through obscurity is our primary defense mechanism <i class="fas fa-quote-right"></i>
+            </p>
+        </footer>
+    </div>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <h3><i class="fas fa-exclamation-circle"></i> Security Alert</h3>
+            <p>Right-click functionality has been disabled for security purposes.</p>
+            <p>Please use the provided interface only.</p>
+            <button onclick="closePopup()"><i class="fas fa-check"></i> OK</button>
+        </div>
+    </div>
+
+    <script src="flag.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
