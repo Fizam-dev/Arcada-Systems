@@ -34,7 +34,7 @@
                     <input type="password" id="password" placeholder="Enter secure passphrase" autocomplete="off">
                 </div>
                 
-                <button id="loginBtn" onclick="attemptLogin()">
+                <button id="loginBtn">
                     <i class="fas fa-sign-in-alt"></i> Authenticate
                 </button>
                 
@@ -78,11 +78,85 @@
             <h3><i class="fas fa-exclamation-circle"></i> Security Alert</h3>
             <p>Right-click functionality has been disabled for security purposes.</p>
             <p>Please use the provided interface only.</p>
-            <button onclick="closePopup()"><i class="fas fa-check"></i> OK</button>
+            <button id="popupOkBtn"><i class="fas fa-check"></i> OK</button>
         </div>
     </div>
 
     <script src="flag.js"></script>
     <script src="main.js"></script>
+    
+    <script>
+        // AMBIL FUNCTION DARI CONTOH CTF BINARY UNTUK DISABLE SHORTCUT
+        // TAPI TETAPKAN Ctrl+U TIDAK DI-DISABLE (VULNERABILITY)
+        
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showPopup();
+            return false;
+        });
+
+        document.addEventListener('keydown', function(e) {
+            // Disable F12
+            if(e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                showPopup();
+                return false;
+            }
+            
+            // TIDAK DISABLE Ctrl+U - INI VULNERABILITY UTAMA
+            // if(e.ctrlKey && e.key === 'u') {
+            //     e.preventDefault();
+            //     return false;
+            // }
+            
+            // Disable Ctrl+Shift+I
+            if(e.ctrlKey && e.shiftKey && (e.key === 'I' || e.keyCode === 73)) {
+                e.preventDefault();
+                showPopup();
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+J
+            if(e.ctrlKey && e.shiftKey && (e.key === 'J' || e.keyCode === 74)) {
+                e.preventDefault();
+                showPopup();
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+C
+            if(e.ctrlKey && e.shiftKey && (e.key === 'C' || e.keyCode === 67)) {
+                e.preventDefault();
+                showPopup();
+                return false;
+            }
+        });
+
+        // Function showPopup (guna yang sama seperti contoh pertama)
+        function showPopup() {
+            const popup = document.getElementById('popup');
+            const blocker = document.getElementById('blocker');
+            
+            popup.style.display = 'flex';
+            blocker.style.display = 'block';
+        }
+
+        // Initialize popup button
+        document.getElementById('popupOkBtn').addEventListener('click', function() {
+            const popup = document.getElementById('popup');
+            const blocker = document.getElementById('blocker');
+            
+            popup.style.display = 'none';
+            blocker.style.display = 'none';
+        });
+
+        // Additional protection (optional)
+        setInterval(function() {
+            if(window.outerHeight - window.innerHeight > 200 || 
+               window.outerWidth - window.innerWidth > 200) {
+                // Developer tools might be open
+                console.log('%c⚠️  Developer tools detected', 'color: #ffc107; font-weight: bold;');
+            }
+        }, 1000);
+    </script>
 </body>
 </html>
