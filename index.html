@@ -83,78 +83,52 @@
     </div>
 
     <script src="flag.js"></script>
-    <script src="main.js"></script>
-    
     <script>
-        // AMBIL FUNCTION DARI CONTOH CTF BINARY UNTUK DISABLE SHORTCUT
-        // TAPI TETAPKAN Ctrl+U TIDAK DI-DISABLE (VULNERABILITY)
-        
+        // Block right click and keyboard shortcuts for view source
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
-            showPopup();
+            alert('Right click disabled for this CTF challenge');
             return false;
         });
 
         document.addEventListener('keydown', function(e) {
             // Disable F12
-            if(e.key === 'F12' || e.keyCode === 123) {
+            if(e.key === 'F12') {
                 e.preventDefault();
-                showPopup();
                 return false;
             }
             
-            // TIDAK DISABLE Ctrl+U - INI VULNERABILITY UTAMA
-            // if(e.ctrlKey && e.key === 'u') {
-            //     e.preventDefault();
-            //     return false;
-            // }
-            
-            // Disable Ctrl+Shift+I
-            if(e.ctrlKey && e.shiftKey && (e.key === 'I' || e.keyCode === 73)) {
+            // Disable Ctrl+U (view source)
+            if(e.ctrlKey && e.key === 'u') {
                 e.preventDefault();
-                showPopup();
                 return false;
             }
             
-            // Disable Ctrl+Shift+J
-            if(e.ctrlKey && e.shiftKey && (e.key === 'J' || e.keyCode === 74)) {
+            // Disable Ctrl+Shift+I (developer tools)
+            if(e.ctrlKey && e.shiftKey && e.key === 'I') {
                 e.preventDefault();
-                showPopup();
                 return false;
             }
             
-            // Disable Ctrl+Shift+C
-            if(e.ctrlKey && e.shiftKey && (e.key === 'C' || e.keyCode === 67)) {
+            // Disable Ctrl+Shift+J (JavaScript console)
+            if(e.ctrlKey && e.shiftKey && e.key === 'J') {
                 e.preventDefault();
-                showPopup();
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+C (inspect element)
+            if(e.ctrlKey && e.shiftKey && e.key === 'C') {
+                e.preventDefault();
                 return false;
             }
         });
 
-        // Function showPopup (guna yang sama seperti contoh pertama)
-        function showPopup() {
-            const popup = document.getElementById('popup');
-            const blocker = document.getElementById('blocker');
-            
-            popup.style.display = 'flex';
-            blocker.style.display = 'block';
-        }
-
-        // Initialize popup button
-        document.getElementById('popupOkBtn').addEventListener('click', function() {
-            const popup = document.getElementById('popup');
-            const blocker = document.getElementById('blocker');
-            
-            popup.style.display = 'none';
-            blocker.style.display = 'none';
-        });
-
-        // Additional protection (optional)
+        // Additional protection against developer tools opening
         setInterval(function() {
             if(window.outerHeight - window.innerHeight > 200 || 
                window.outerWidth - window.innerWidth > 200) {
                 // Developer tools might be open
-                console.log('%c⚠️  Developer tools detected', 'color: #ffc107; font-weight: bold;');
+                document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:100px;">Developer tools detected. Challenge cannot be viewed with dev tools open.</h1>';
             }
         }, 1000);
     </script>
